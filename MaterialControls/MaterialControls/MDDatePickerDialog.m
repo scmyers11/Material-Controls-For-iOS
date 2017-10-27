@@ -146,6 +146,19 @@
   return self;
 }
 
+- (void) setCalendarHeaderBackgroundColor:(UIColor*)color {
+    [[self header] setBackgroundColor:color];
+}
+
+- (void) setCalendarHeaderDayLabelBackgroundColor:(UIColor*)color {
+    [[[self header] labelDayName] setBackgroundColor:color];
+}
+
+- (void) setPickedDayColor:(UIColor*)color {
+    [[self calendar] overrideSelectedCellColor:color];
+}
+
+
 -(NSDate*)selectedDate;
 {
     return self.calendar.selectedDate;

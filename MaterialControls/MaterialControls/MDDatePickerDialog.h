@@ -40,5 +40,10 @@
 
 - (void)show;
 - (void)setTitleOk: (nonnull NSString *) okTitle andTitleCancel: (nonnull NSString *) cancelTitle;
+
+- (void) setCalendarHeaderBackgroundColor:(UIColor*)color;
+- (void) setCalendarHeaderDayLabelBackgroundColor:(UIColor*)color;
+- (void) setPickedDayColor:(UIColor*)color;
+
 @end
 #endif
