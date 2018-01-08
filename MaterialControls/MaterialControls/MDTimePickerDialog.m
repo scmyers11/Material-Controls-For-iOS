@@ -49,6 +49,7 @@
 
 @property(nonatomic) UILabel *labelTimeModeAM;
 @property(nonatomic) UILabel *labelTimeModePM;
+@property(nonatomic) UILabel *labelInfo;
 @property(nonatomic) CAShapeLayer *backgroundTimeMode;
 
 @property(nonatomic) UIView *clockHour;
@@ -153,6 +154,13 @@
 
   [self updateColors];
   [self updateContent];
+  [self updateClockHand];
+  
+  if(_currentHour < 12) {
+    [self changeTimeModeAM];
+  } else {
+    [self changeTimeModePM];
+  }
 
   UIPanGestureRecognizer *panGesture =
       [[UIPanGestureRecognizer alloc] initWithTarget:self
@@ -383,6 +391,10 @@
 
   [_labelTimeModePM addGestureRecognizer:showTimeModePMSelectorGesture];
   [_labelTimeModePM setUserInteractionEnabled:YES];
+    
+  _labelInfo = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, kCalendarHeaderHeight + 20.0f, popupHolder.mdWidth - 40.0f, 40.0f)];
+  [popupHolder addSubview:_labelInfo];
+  _labelInfo.textAlignment = NSTextAlignmentCenter;
 
   _backgroundTimeMode = [[CAShapeLayer alloc] init];
   _backgroundTimeMode.backgroundColor = [UIColor clearColor].CGColor;
@@ -1184,12 +1196,16 @@
 - (void)changeTimeModeAM {
   if (_currentHour >= 12)
     _currentHour -= 12;
+  _labelTimeModeAM.textColor = _titleSelectedColor;
+  _labelTimeModePM.textColor = _titleColor;
   _backgroundTimeMode.frame = _labelTimeModeAM.frame;
   [self updateHeaderView];
 }
 - (void)changeTimeModePM {
   if (_currentHour < 12)
     _currentHour += 12;
+  _labelTimeModePM.textColor = _titleSelectedColor;
+  _labelTimeModeAM.textColor = _titleColor;
   _backgroundTimeMode.frame = _labelTimeModePM.frame;
   [self updateHeaderView];
 }
@@ -1343,5 +1359,15 @@
 
 - (void)didCancel {
   [self removeFromSuperview];
+}
+
+- (void)setInfoLabelColor:(UIColor *)infoLabelColor {
+  _infoLabelColor = infoLabelColor;
+  _labelInfo.textColor = _infoLabelColor;
+}
+
+- (void)setInfoLabelText:(NSString *)infoLabelText {
+  _infoLabelText = infoLabelText;
+  _labelInfo.text = _infoLabelText;
 }
 @end

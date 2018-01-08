@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UIColor *selectionCenterColor;
 @property(nonatomic, strong) UIColor *backgroundPopupColor;
 @property(nonatomic, strong) UIColor *backgroundClockColor;
+@property(nonatomic, strong) NSString *infoLabelText;
+@property(nonatomic, strong) UIColor *infoLabelColor;
 @property(nonatomic) MDClockMode clockMode;
 
 @property(nonatomic, assign) MDTimePickerTheme theme;
