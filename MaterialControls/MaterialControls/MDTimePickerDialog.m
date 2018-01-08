@@ -386,7 +386,7 @@
   [_labelTimeModePM addGestureRecognizer:showTimeModePMSelectorGesture];
   [_labelTimeModePM setUserInteractionEnabled:YES];
     
-  _labelInfo = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, kCalendarHeaderHeight + 20.0f, popupHolder.mdWidth - 40.0f, 40.0f)];
+  _labelInfo = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, kCalendarHeaderHeight + 20.0f, popupHolder.mdWidth - 80.0f, 80.0f)];
   [popupHolder addSubview:_labelInfo];
   _labelInfo.textAlignment = NSTextAlignmentCenter;
   _labelInfo.numberOfLines = 0;
@@ -1370,5 +1370,8 @@
 - (void)setInfoLabelText:(NSString *)infoLabelText {
   _infoLabelText = infoLabelText;
   _labelInfo.text = _infoLabelText;
+  NSDictionary *attributesDictionary = @{NSFontAttributeName:_labelInfo.font};
+  CGRect labelSize = [_labelInfo.text boundingRectWithSize:_labelInfo.frame.size options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading) attributes:attributesDictionary context:nil];
+  _labelInfo.frame = CGRectMake(_labelInfo.frame.origin.x, _labelInfo.frame.origin.y, labelSize.size.width, labelSize.size.height);
 }
 @end
