@@ -155,12 +155,6 @@
   [self updateColors];
   [self updateContent];
   [self updateClockHand];
-  
-  if(_currentHour < 12) {
-    [self changeTimeModeAM];
-  } else {
-    [self changeTimeModePM];
-  }
 
   UIPanGestureRecognizer *panGesture =
       [[UIPanGestureRecognizer alloc] initWithTarget:self
@@ -174,6 +168,12 @@
   [popupHolder addGestureRecognizer:tapGesture];
   [popupHolder bringSubviewToFront:_labelTimeModeAM];
   [popupHolder bringSubviewToFront:_labelTimeModePM];
+    
+  if(_currentHour < 12) {
+      [self changeTimeModeAM];
+  } else {
+      [self changeTimeModePM];
+  }
 
   [[NSNotificationCenter defaultCenter]
       addObserver:self
@@ -395,6 +395,8 @@
   _labelInfo = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, kCalendarHeaderHeight + 20.0f, popupHolder.mdWidth - 40.0f, 40.0f)];
   [popupHolder addSubview:_labelInfo];
   _labelInfo.textAlignment = NSTextAlignmentCenter;
+  _labelInfo.numberOfLines = 0;
+  _labelInfo.lineBreakMode = NSLineBreakByWordWrapping;
 
   _backgroundTimeMode = [[CAShapeLayer alloc] init];
   _backgroundTimeMode.backgroundColor = [UIColor clearColor].CGColor;
@@ -993,6 +995,7 @@
 - (void)show {
   [self addSelfToMainWindow];
   self.hidden = NO;
+  [self updateHeaderView];
   [self showClockHour];
 }
 
