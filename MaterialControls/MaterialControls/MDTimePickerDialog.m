@@ -168,12 +168,6 @@
   [popupHolder addGestureRecognizer:tapGesture];
   [popupHolder bringSubviewToFront:_labelTimeModeAM];
   [popupHolder bringSubviewToFront:_labelTimeModePM];
-    
-  if(_currentHour < 12) {
-      [self changeTimeModeAM];
-  } else {
-      [self changeTimeModePM];
-  }
 
   [[NSNotificationCenter defaultCenter]
       addObserver:self
@@ -995,7 +989,11 @@
 - (void)show {
   [self addSelfToMainWindow];
   self.hidden = NO;
-  [self updateHeaderView];
+  if(_currentHour < 12) {
+      [self changeTimeModeAM];
+  } else {
+      [self changeTimeModePM];
+  }
   [self showClockHour];
 }
 
