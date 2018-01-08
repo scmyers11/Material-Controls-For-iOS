@@ -386,7 +386,7 @@
   [_labelTimeModePM addGestureRecognizer:showTimeModePMSelectorGesture];
   [_labelTimeModePM setUserInteractionEnabled:YES];
     
-  _labelInfo = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, kCalendarHeaderHeight + 10.0f, popupHolder.mdWidth - 80.0f, 80.0f)];
+  _labelInfo = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, kCalendarHeaderHeight + kCalendarClockHeight + 10.0f, popupHolder.mdWidth - 80.0f, 80.0f)];
   [popupHolder addSubview:_labelInfo];
   _labelInfo.textAlignment = NSTextAlignmentCenter;
   _labelInfo.numberOfLines = 0;
